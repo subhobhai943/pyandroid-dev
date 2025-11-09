@@ -15,18 +15,31 @@ class AndroidApp:
     the application lifecycle and global state.
     """
     
-    def __init__(self, app_name: str, package_name: str):
+    def __init__(self, app_name: str, package_name: str, use_gui: bool = True):
         """Initialize Android application.
         
         Args:
             app_name: Human readable application name
             package_name: Android package name (e.g. com.example.myapp)
+            use_gui: Whether to use GUI rendering (requires Kivy)
         """
         self.app_name = app_name
         self.package_name = package_name
+        self.use_gui = use_gui
         self.activities = {}
         self.current_activity = None
         self.logger = logging.getLogger(f"PyAndroid.{app_name}")
+        self.renderer = None
+        
+        # Initialize renderer if GUI is enabled
+        if self.use_gui:
+            try:
+                from .backend import KivyRenderer
+                self.renderer = KivyRenderer(self)
+                self.logger.info("Kivy renderer initialized")
+            except ImportError:
+                self.logger.warning("Kivy not available. Running in console mode.")
+                self.use_gui = False
         
     def register_activity(self, activity_name: str, activity_class):
         """Register an activity with the application.
@@ -58,6 +71,13 @@ class AndroidApp:
         self.logger.info(f"Starting {self.app_name} application")
         if self.current_activity:
             self.current_activity.resume()
+            
+            # If GUI is enabled, start Kivy rendering
+            if self.use_gui and self.renderer:
+                self.logger.info("Starting GUI mode with Kivy")
+                self.renderer.run()
+            else:
+                self.logger.info("Running in console mode (no GUI)")
 
 
 class Activity:
