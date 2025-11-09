@@ -25,7 +25,7 @@ A comprehensive Python library for Android application development with **real G
 ### Quick Install
 
 ```bash
-pip install pyandroid
+pip install pyandroid-dev==1.2.1
 ```
 
 ### With GUI Support (Recommended)
