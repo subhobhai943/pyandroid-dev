@@ -9,7 +9,7 @@ setup(
     name="pyandroid-dev",
     version="1.1.0",
     author="Subhobhai",
-    author_email="",
+    author_email="sarkarsubhadip604@gmail.com",
     description="A Python library for creating Android applications",
     long_description=long_description,
     long_description_content_type="text/markdown",
