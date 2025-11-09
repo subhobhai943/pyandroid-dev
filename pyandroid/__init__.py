@@ -6,7 +6,7 @@ using cross-platform development techniques.
 
 __version__ = "1.0.0"
 __author__ = "Subhobhai"
-__email__ = "subhobhai943@example.com"
+__email__ = "sarkarsubhadip604@gmail.com"
 __license__ = "MIT"
 
 from .core import AndroidApp, Activity, Intent
