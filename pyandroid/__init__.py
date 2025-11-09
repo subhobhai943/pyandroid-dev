@@ -1,26 +1,41 @@
-"""PyAndroid - A Python library for Android application development.
+"""PyAndroid - A Python library for creating Android applications.
 
 This library provides a Pythonic interface for building Android applications
-using cross-platform development techniques.
+with support for GUI rendering through Kivy.
+
+Basic Usage:
+    >>> from pyandroid import AndroidApp, Activity
+    >>> from pyandroid.ui import LinearLayout, Button
+    >>>
+    >>> class MainActivity(Activity):
+    ...     def on_start(self):
+    ...         layout = LinearLayout("main", orientation="vertical")
+    ...         button = Button("btn1", "Click Me")
+    ...         layout.add_view(button)
+    ...         self.add_view("main", layout)
+    >>>
+    >>> app = AndroidApp("MyApp", "com.example.myapp")
+    >>> app.register_activity("main", MainActivity)
+    >>> app.start_activity("main")
+    >>> app.run()
+
+For more examples, see the examples/ directory in the repository.
 """
 
-__version__ = "1.0.0"
-__author__ = "Subhobhai"
-__email__ = "sarkarsubhadip604@gmail.com"
-__license__ = "MIT"
-
 from .core import AndroidApp, Activity, Intent
-from .ui import View, Layout, Widget
-from .utils import Logger, FileManager, NetworkManager
+from . import ui
+from . import utils
+from .__version__ import __version__, __author__, __license__
 
 __all__ = [
-    'AndroidApp',
-    'Activity', 
-    'Intent',
-    'View',
-    'Layout',
-    'Widget',
-    'Logger',
-    'FileManager',
-    'NetworkManager'
+    "AndroidApp",
+    "Activity",
+    "Intent",
+    "ui",
+    "utils",
+    "__version__",
 ]
+
+# Attribution requirement as per license
+print(f"PyAndroid v{__version__} - Built by {__author__}")
+print("GitHub: https://github.com/subhobhai943/pyandroid-dev")
